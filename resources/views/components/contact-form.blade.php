@@ -14,23 +14,23 @@
                     <form id="contactForm">
                         <!-- Name input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="name" type="text" placeholder="Enter your name..."/>
-                            <label for="name">Full name</label>
+                            <input class="form-control" id="name" type="text" placeholder="Enter Your Name"/>
+                            <label for="name">Enter Your Name</label>
                         </div>
                         <!-- Email address input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="email" type="email" placeholder="name@example.com" />
-                            <label for="email">Email address</label>
+                            <input class="form-control" id="email" type="email" placeholder="Enter Your Email" />
+                            <label for="email">Enter Your Email</label>
                         </div>
                         <!-- Phone number input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890"/>
-                            <label for="phone">Phone number</label>
+                            <input class="form-control" id="phone" type="tel" placeholder="Enter Your Phone"/>
+                            <label for="phone">Enter Your Phone</label>
                         </div>
                         <!-- Message input-->
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem"></textarea>
-                            <label for="message">Message</label>
+                            <textarea class="form-control" id="message" type="text" placeholder="Enter Your Message" style="height: 10rem"></textarea>
+                            <label for="message">Enter Your Message....</label>
                         </div>
                         <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton">Submit</button></div>
                     </form>
@@ -39,3 +39,47 @@
         </div>
     </div>
 </section>
+
+<script>
+    let contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        let name = document.getElementById('name').value;
+        let email = document.getElementById('email').value;
+        let phone = document.getElementById('phone').value;
+        let message = document.getElementById('message').value;
+
+        if (name.length === 0) {
+            alert('Name is Required');
+        } else if (email.length === 0) {
+            alert('Email is Required');
+        } else if (phone.length === 0) {
+            alert('Phone is Required');
+        } else {
+            let formData = {
+                name: name,
+                email: email,
+                phone: phone,
+                message: message,
+            }
+            let URL = '/contactRequest'
+
+            // Loader Show Content Hide
+            document.getElementById('loading-div').classList.remove('d-none');
+            document.getElementById('content-div').classList.add('d-none');
+
+            let result = await axios.post(URL, formData);
+            
+            // Loader Hide Content Show
+            document.getElementById('loading-div').classList.add('d-none');
+            document.getElementById('content-div').classList.remove('d-none');
+
+            if (result.status === 200 && result.data === 1) {
+                alert('Your Request has been Submitted Successfully.');
+                contactForm.reset();
+            } else {
+                alert('Something Went Wrong.');
+            }
+        }
+    })
+</script>

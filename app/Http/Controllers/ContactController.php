@@ -12,6 +12,7 @@ class ContactController extends Controller
     }
 
     function contactRequest(Request $request) {
+        // sleep(5);
         return DB::table('contacts')->insert($request->input());
     }
 }
