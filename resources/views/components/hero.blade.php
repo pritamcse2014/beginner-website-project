@@ -16,10 +16,27 @@
             <div class="col-xxl-7">
                 <div class="d-flex justify-content-center mt-5 mt-xxl-0">
                     <div class="profile">
-                        <img class="profile-img" id="profileImg" src="assets/profile.png" alt="..." />
+                        <img class="profile-img" id="img" src="assets/profile.png" alt="..." />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </header>
+
+<script>
+    getHeroData()
+    async function getHeroData() {
+        let URL = '/heroData'
+        // let response = await axios.get(URL);
+        try {
+            let response = await axios.get(URL);
+            document.getElementById('keyLine').innerHTML = response.data['keyLine'];
+            document.getElementById('short_title').innerHTML = response.data['short_title'];
+            document.getElementById('title').innerHTML = response.data['title'];
+            document.getElementById('img').src = response.data['img'];
+        } catch (error) {
+            alert(error);
+        }
+    }
+</script>
