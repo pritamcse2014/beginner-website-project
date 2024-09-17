@@ -25,6 +25,11 @@
         // let response = await axios.get(URL);
         try {
             let response = await axios.get(URL);
+
+            // Loader Hide Content Show
+            document.getElementById('loading-div').classList.add('d-none');
+            document.getElementById('content-div').classList.remove('d-none');
+            
             response.data.forEach( (item) => {
                 document.getElementById('language-list').innerHTML += (
                     `
