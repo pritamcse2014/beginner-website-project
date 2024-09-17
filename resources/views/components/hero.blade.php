@@ -30,6 +30,10 @@
         let URL = '/heroData'
         // let response = await axios.get(URL);
         try {
+            // Loader Show Content Hide
+            document.getElementById('loading-div').classList.remove('d-none');
+            document.getElementById('content-div').classList.add('d-none');
+            
             let response = await axios.get(URL);
             document.getElementById('keyLine').innerHTML = response.data['keyLine'];
             document.getElementById('short_title').innerHTML = response.data['short_title'];

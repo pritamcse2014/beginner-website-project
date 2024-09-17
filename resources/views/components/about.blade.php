@@ -38,6 +38,11 @@
         // let response = await axios.get(URL);
         try {
             let response = await axios.get(URL);
+
+            // Loader Hide Content Show
+            document.getElementById('loading-div').classList.add('d-none');
+            document.getElementById('content-div').classList.remove('d-none');
+            
             document.getElementById('twitterLink').href = response.data['twitterLink'];
             document.getElementById('githubLink').href = response.data['githubLink'];
             document.getElementById('linkedinLink').href = response.data['linkedinLink'];
